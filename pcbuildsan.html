@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Build Sẵn - Quoc Minh Computer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="site-header text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <a href="index.html" class="text-decoration-none brand-logo">
+                <h1 class="h4 mb-0 text-danger fw-bold">QUOC MINH COMPUTER</h1>
+            </a>
+
+            <nav class="nav-menu d-flex align-items-center flex-wrap gap-1">
+                <a href="index.html" class="nav-link-item text-white text-decoration-none px-3 py-1">Trang Chủ</a>
+                <a href="linhkien.html" class="nav-link-item text-white text-decoration-none px-3 py-1">Linh Kiện PC</a>
+                <a href="pcbuildsan.html" class="nav-link-item text-white text-decoration-none px-3 py-1 active">PC Build Sẵn</a>
+                <a href="lienhe.html" class="nav-link-item text-white text-decoration-none px-3 py-1">Liên Hệ</a>
+
+                <button type="button" id="openCartBtn" class="btn btn-light btn-sm ms-2 px-3 fw-bold position-relative">
+                    Giỏ Hàng
+                    <span class="badge bg-danger ms-1 cart-count-badge" style="display: none;">0</span>
+                </button>
+
+                <div id="authNavArea" class="ms-2">
+                    <a href="login.html" class="btn btn-outline-danger btn-sm px-3 fw-bold">Đăng Nhập</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-4 flex-wrap gap-2">
+            <h2 class="mb-0 text-uppercase fw-bold">Cấu Hình PC Build Sẵn</h2>
+            <span class="text-muted small">Đã lắp ráp sẵn &amp; kiểm tra nhiệt độ kỹ lưỡng</span>
+        </div>
+
+        <div class="row g-4">
+            <!-- Cấu hình 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 product-card">
+                    <div class="product-img-wrap" style="height: 240px;">
+                        <span class="badge bg-success category-badge">PHỔ THÔNG</span>
+                        <img src="250-9705-pc-gaming-intel-i5-12400f-rtx-5050-ram-8gb-ssd-256gb.jpg" alt="PC Gaming Intel i5 12400F RTX 5050">
+                    </div>
+                    <div class="card-body d-flex flex-column text-center">
+                        <h5 class="product-title">PC Gaming Intel i5 12400F | RTX 5050 8GB | RAM 16GB</h5>
+                        <ul class="list-unstyled text-muted small mb-3">
+                            <li><strong>CPU:</strong> Intel Core i5 12400F (6 Nhân 12 Luồng)</li>
+                            <li><strong>VGA:</strong> NVIDIA GeForce RTX 5050 8GB</li>
+                            <li><strong>RAM:</strong> 16GB DDR4 3200MHz</li>
+                            <li><strong>Ổ cứng:</strong> SSD NVMe 256GB</li>
+                        </ul>
+                        <p class="text-danger fw-bold fs-5 mt-auto mb-3 product-price">13.990.000 đ</p>
+                        <button type="button" class="btn btn-outline-dark btn-sm w-100 fw-semibold btn-add-cart">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cấu hình 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 product-card">
+                    <div class="product-img-wrap" style="height: 240px;">
+                        <span class="badge bg-danger category-badge">BÁN CHẠY</span>
+                        <img src="pcgamingmeow.png" alt="PC Gaming Meow RTX 5060 8G">
+                    </div>
+                    <div class="card-body d-flex flex-column text-center">
+                        <h5 class="product-title">PC Gaming Meow RTX 5060 8G | Intel Core i5 12400F</h5>
+                        <ul class="list-unstyled text-muted small mb-3">
+                            <li><strong>CPU:</strong> Intel Core i5 12400F</li>
+                            <li><strong>VGA:</strong> NVIDIA RTX 5060 8GB GDDR7</li>
+                            <li><strong>RAM:</strong> 16GB DDR5</li>
+                            <li><strong>Ổ cứng:</strong> SSD NVMe 500GB</li>
+                        </ul>
+                        <p class="text-danger fw-bold fs-5 mt-auto mb-3 product-price">17.990.000 đ</p>
+                        <button type="button" class="btn btn-outline-dark btn-sm w-100 fw-semibold btn-add-cart">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cấu hình 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 product-card">
+                    <div class="product-img-wrap" style="height: 240px;">
+                        <span class="badge bg-primary category-badge">CAO CẤP</span>
+                        <img src="pcwhitei5.png" alt="PC Gaming White Edition Core i5 14600K RTX 5070">
+                    </div>
+                    <div class="card-body d-flex flex-column text-center">
+                        <h5 class="product-title">PC Gaming White Edition | Core i5 14600K | RTX 5070</h5>
+                        <ul class="list-unstyled text-muted small mb-3">
+                            <li><strong>CPU:</strong> Intel Core i5 14600K (14 Nhân 20 Luồng)</li>
+                            <li><strong>VGA:</strong> NVIDIA RTX 5070 12GB GDDR7</li>
+                            <li><strong>RAM:</strong> 16GB DDR5 6000MHz</li>
+                            <li><strong>Tản nhiệt:</strong> Tản nước AIO 360mm White</li>
+                        </ul>
+                        <p class="text-danger fw-bold fs-5 mt-auto mb-3 product-price">32.500.000 đ</p>
+                        <button type="button" class="btn btn-outline-dark btn-sm w-100 fw-semibold btn-add-cart">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="mb-1 fw-bold text-danger">QUOC MINH COMPUTER</p>
+            <p class="mb-0 small text-secondary">© 2026 Quoc Minh Computer - Quận 10, TP. Hồ Chí Minh. Tất cả các quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
