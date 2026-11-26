@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chi tiết sản phẩm - Quoc Minh Computer</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+<header class="site-header text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <a href="index.html" class="text-decoration-none brand-logo">
+                <h1 class="h4 mb-0 text-danger fw-bold">QUOC MINH COMPUTER</h1>
+            </a>
+
+            <nav class="nav-menu d-flex align-items-center flex-wrap gap-1">
+                <a href="index.html" class="nav-link-item text-white text-decoration-none px-3 py-1">Trang Chủ</a>
+                <a href="linhkien.html" class="nav-link-item text-white text-decoration-none px-3 py-1 active">Laptop &amp; Phụ kiện</a>
+                <a href="pcbuildsan.html" class="nav-link-item text-white text-decoration-none px-3 py-1">PC Build Sẵn</a>
+                <a href="lienhe.html" class="nav-link-item text-white text-decoration-none px-3 py-1">Liên Hệ</a>
+
+                <button type="button" id="openCartBtn" class="btn btn-light btn-sm ms-2 px-3 fw-bold position-relative">
+                    Giỏ Hàng
+                    <span class="badge bg-danger ms-1 cart-count-badge" style="display: none;">0</span>
+                </button>
+
+                <div id="authNavArea" class="ms-2">
+                    <a href="login.html" class="btn btn-outline-danger btn-sm px-3 fw-bold">Đăng Nhập</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+<main class="container my-5">
+<a href="linhkien.html" class="back-link">← Danh sách sản phẩm</a>
+<p class="demo-note mt-4">Dữ liệu mẫu DummyJSON · Giá USD, tồn kho và đánh giá mang tính minh họa.</p>
+<div id="product-detail" aria-busy="true"></div>
+<!-- Một template cho mọi ID; detail.js chỉ thay dữ liệu. -->
+<template id="detail-template">
+<article class="detail-layout">
+  <div><img class="detail-image" alt=""><div class="detail-gallery"></div></div>
+  <div>
+    <p class="detail-category eyebrow"></p><h1 class="detail-title"></h1>
+    <p class="detail-price text-danger fw-bold fs-3"></p><p class="detail-description"></p>
+    <dl class="detail-specs"><dt>Thương hiệu</dt><dd class="detail-brand"></dd><dt>SKU</dt><dd class="detail-sku"></dd><dt>Bảo hành mẫu</dt><dd class="detail-warranty"></dd></dl>
+    <p class="detail-stock text-secondary"></p>
+    <label for="quantity" class="form-label">Số lượng</label>
+    <div class="d-flex flex-wrap gap-3"><input id="quantity" type="number" min="1" step="1" value="1" class="form-control quantity-input"><button id="add-product" type="button" class="btn btn-danger">Thêm vào giỏ demo</button></div>
+    <p id="detail-feedback" class="mt-3" role="status" aria-live="polite"></p>
+  </div>
+</article>
+<section class="detail-panel mt-4"><h2 class="h4">Đánh giá từ dữ liệu mẫu</h2><div class="detail-reviews"></div></section>
+</template>
+</main>
+<footer class="site-footer text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="mb-1 fw-bold text-danger">QUOC MINH COMPUTER</p>
+            <p class="mb-0 small text-secondary">© 2026 Quoc Minh Computer - Quận 10, TP. Hồ Chí Minh. Tất cả các quyền được bảo lưu.</p>
+        </div>
+    </footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/detail.js"></script>
+</body></html>

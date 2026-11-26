@@ -1,0 +1,93 @@
+ĐỌC PROJECT THEO LUỒNG NÀY
+
+Mở cả thư mục bằng VS Code, chạy index.html bằng Live Server.
+Không mở riêng file JS để chạy. HTML sẽ nạp JS theo đúng thứ tự.
+
+1. CẤU TRÚC THƯ MỤC
+
+SPCK-JSA-QMinh/
+  index.html                  Trang chủ, sản phẩm nổi bật API
+  linhkien.html               Danh sách laptop/phụ kiện API
+  detail.html                 Chi tiết chung theo ID
+  pcbuildsan.html             Cấu hình PC mẫu, chưa dùng API
+  login.html                  Hai tab tài khoản demo
+  lienhe.html                 Form liên hệ
+  assets/
+    css/style.css             Giao diện dùng chung
+    images/                   Ảnh PC cũ và ảnh dự phòng
+    js/
+      config.js               URL và cấu hình
+      api.js                  Các hàm fetch
+      ui.js                   Tạo card, format tiền, ảnh/lỗi
+      products.js             Luồng danh sách và trang chủ
+      detail.js               Luồng chi tiết
+      cart.js                 Giỏ localStorage
+      auth.js                 Tài khoản demo
+      app.js                  Khởi tạo menu, modal, form liên hệ
+
+2. CONFIG.JS -> API.JS
+
+Đọc SHOP_CONFIG.baseURL và categories trước.
+getProducts() gọi hai endpoint:
+  https://dummyjson.com/products/category/laptops?limit=0
+  https://dummyjson.com/products/category/mobile-accessories?limit=0
+
+Response là object có products, không phải một mảng trực tiếp:
+  { products: [...], total: ..., skip: ..., limit: ... }
+
+Thứ tự: tạo URL -> await fetch -> response.ok -> await response.json()
+-> kiểm tra Array.isArray(data.products) -> dùng mảng products.
+Promise.all đợi hai danh mục cùng tải xong, sau đó gộp bằng flat().
+
+Không copy giá hay ảnh từ card HTML cũ vào object API.
+Giá nguồn đang dùng USD. API này không có bộ danh mục CPU/VGA của trang cũ.
+Tài liệu: https://dummyjson.com/docs/products
+
+3. UI.JS -> PRODUCTS.JS -> LINHKIEN.HTML
+
+createProductCard(product) tạo một card bằng DOM.
+Link lấy đúng product.id: detail.html?id=ID.
+Tên dùng textContent, ảnh dùng src và có ảnh dự phòng.
+
+products.js lấy mảng -> filter theo từ khóa/danh mục -> sort theo giá
+-> replaceChildren bằng các card mới.
+Các trạng thái cần nhìn thấy: đang tải, có dữ liệu, không có kết quả,
+lỗi kèm nút Thử lại. Trang chủ dùng cùng luồng và slice bốn sản phẩm đầu.
+
+4. DETAIL.HTML -> DETAIL.JS
+
+URLSearchParams(location.search).get('id') đọc ID trên URL.
+ShopAPI.getProduct(id) gọi https://dummyjson.com/products/ID.
+Không phụ thuộc sản phẩm vừa bấm được cất tạm trong storage, nên có thể
+tải lại hoặc mở link trực tiếp mà vẫn lấy đúng dữ liệu.
+
+Clone template trong detail.html -> điền tên, mô tả, ảnh, giá và thông tin.
+Lặp images tạo nút chọn ảnh. Lặp reviews hiển thị đánh giá nguồn.
+Khi thêm giỏ: Number(input.value), kiểm tra số nguyên > 0 và không vượt
+tồn kho mẫu/99, rồi Cart.add(). Thất bại thì báo lỗi thay vì báo đã thêm.
+
+5. CART.JS -> AUTH.JS -> APP.JS
+
+Giỏ: qmc_cart_items. Dữ liệu cũ không có currency được xem là VND.
+Sản phẩm API lưu ID và USD; PC mẫu giữ tên/giá VND của em.
+Tổng tính riêng mỗi đơn vị tiền. Chưa tự cập nhật giá API khi mở giỏ.
+
+Tài khoản: qmc_users là danh sách demo; qmc_current_user là phiên tên/email.
+Đăng ký kiểm tra dữ liệu rồi mới lưu. Đăng nhập phải khớp email/mật khẩu.
+Đây không phải backend auth, chỉ dùng mật khẩu demo để học JSON/localStorage.
+
+app.js tạo khung modal giỏ và gắn sự kiện chung khi DOMContentLoaded.
+Thứ tự script: config -> ui -> cart -> auth -> app -> api -> file trang.
+Các file dùng script thường. Không tự thêm type=module khi chưa đổi cấu trúc.
+
+6. TỰ THỬ
+
+- Tìm tên, đổi bộ lọc và sắp xếp giá, mở đúng sản phẩm sang chi tiết.
+- Refresh chi tiết; thử id rỗng, chữ, hoặc ID không tồn tại.
+- Tắt mạng, tải lại, bật mạng và bấm thử lại.
+- Thử số lượng 0, âm, lẻ, quá tồn kho và số hợp lệ.
+- Thêm USD và một PC mẫu VND: tổng phải tách riêng.
+- Sai mật khẩu không đăng nhập được, email trùng không đăng ký được.
+- Bấm đặt hàng: không báo gửi đơn thành công, không tự xóa giỏ.
+
+Các việc phát triển tiếp nằm trong NOTE_REVIEW_CUA_THAY.txt.
