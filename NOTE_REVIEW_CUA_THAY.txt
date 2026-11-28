@@ -1,0 +1,124 @@
+THẦY NOTE LẠI CHO EM
+
+Giao diện đỏ/đen của em đã có hướng rõ rồi, thầy giữ lại và chỉnh khoảng cách,
+menu, card, form tìm kiếm và bố cục điện thoại cho gọn hơn.
+
+Project ban đầu chưa có fetch API. Danh sách linh kiện, sản phẩm nổi bật và
+cấu hình PC đều viết trực tiếp trong HTML. Vì vậy thầy làm mẫu phần laptop
+và phụ kiện bằng DummyJSON, rồi nối sang một trang chi tiết chung theo ID.
+
+VỀ NGUỒN DỮ LIỆU
+
+API: https://dummyjson.com/docs/products
+GET không cần đăng ký API key. Đang dùng hai nhóm laptops và mobile-accessories.
+Nguồn này không có danh mục CPU, VGA, RAM như danh sách cũ của em.
+Thầy đổi tên menu thành Laptop & Phụ kiện cho đúng dữ liệu, không gán nhầm
+laptop thành bộ PC hoặc đổi tên sản phẩm API thành linh kiện không có thật.
+
+Trang PC build sẵn vẫn là cấu hình mẫu em đã viết, có ghi rõ chưa lấy API.
+Giá mẫu của phần này là VND. Sản phẩm DummyJSON dùng USD và được ghi rõ trên UI.
+Giỏ tính riêng từng đơn vị, không cộng USD với VND thành một số tiền.
+
+THẦY ĐÃ SỬA CÁC FILE NÀY
+
+index.html
+- Giữ banner, thương hiệu và bố cục chính của em.
+- Đổi sản phẩm nổi bật sang lấy dữ liệu API, link cùng ID với trang danh sách.
+
+linhkien.html
+- Bỏ các card linh kiện viết sẵn ở trang này, thay bằng khung render API.
+- Có tìm tên, lọc laptop/phụ kiện, sắp xếp giá, trạng thái tải/lỗi và thử lại.
+- Tên file giữ nguyên để các liên kết hiện có vẫn dùng được.
+
+pcbuildsan.html
+- Giữ ba cấu hình mẫu, cập nhật đường dẫn ảnh, CSS, JS và menu.
+- Một ảnh cấu hình được tham chiếu nhưng không có trong project, đã dùng ảnh
+  dự phòng. Em bổ sung ảnh đúng cấu hình khi làm tiếp.
+- Có ghi chú dữ liệu mẫu. Phần này là việc em cần xử lý tiếp nếu toàn bộ
+  danh sách cuối khóa bắt buộc phải lấy từ API.
+
+login.html
+- Giữ hai tab đăng nhập/đăng ký, form không bị kéo rộng ra toàn màn hình.
+- Bỏ checkbox Ghi nhớ vì chưa có xử lý riêng.
+- Ghi rõ tài khoản demo, thêm chỗ báo lỗi và autocomplete cho mật khẩu.
+
+lienhe.html
+- Giữ nội dung và bố cục của em, cập nhật đường dẫn/menu.
+- Form kiểm tra nội dung trống, không báo đã gửi đến cửa hàng khi chưa có API nhận tin.
+
+assets/css/style.css
+- Chuyển từ style.css ngoài cùng vào đây, thêm bố cục danh sách/chi tiết.
+- Ảnh sản phẩm dùng contain, giữ nguyên hình, không cắt mất máy/phụ kiện.
+- Chi tiết hai cột trên máy tính, một cột trên điện thoại.
+
+assets/js/app.js
+- Chuyển từ app.js cũ vào đây và tách các phần ra file nhỏ hơn.
+- Giữ modal giỏ Bootstrap, gắn sự kiện dùng chung và đánh dấu menu đang mở.
+- Nút đặt hàng chỉ báo chưa có checkout, không tự xóa giỏ rồi báo đơn thành công.
+
+assets/images/
+- Ảnh cũ được chuyển vào đây, không bỏ ảnh cấu hình PC của em.
+- Thêm product-placeholder.svg để dùng khi ảnh sản phẩm bị lỗi.
+
+FILE MỚI EM NÊN ĐỌC THEO THỨ TỰ
+
+assets/js/config.js
+  URL API, danh mục và các key localStorage.
+
+assets/js/api.js
+  Fetch danh sách, kiểm tra response.ok và data.products trước khi render.
+  Chi tiết gọi /products/{id}, có kiểm tra ID và danh mục.
+  Không lấy tạm sản phẩm đầu tiên khi ID sai.
+
+assets/js/ui.js
+  Format tiền, ảnh dự phòng, tạo card và thông báo lỗi.
+  Chữ từ API dùng textContent để tránh đưa nội dung lạ vào HTML.
+
+assets/js/products.js
+  Fetch dữ liệu rồi tìm/lọc/sắp xếp trên mảng đã tải.
+  Trang chủ dùng lại file này, chỉ hiện bốn sản phẩm nổi bật.
+
+detail.html và assets/js/detail.js
+  Một trang chi tiết dùng chung: detail.html?id=78 chẳng hạn.
+  Đọc ID từ URL, fetch lại sản phẩm, render ảnh, mô tả, giá, SKU, thương hiệu,
+  bảo hành mẫu và đánh giá từ nguồn. Có chọn ảnh và thêm giỏ theo số lượng.
+  Chặn số lượng lẻ, số âm, vượt tồn kho mẫu và hết hàng.
+
+assets/js/cart.js
+  Giữ key qmc_cart_items, hỗ trợ dữ liệu giỏ cũ và ảnh đã chuyển thư mục.
+  Thêm/sửa số lượng, tính tổng riêng USD/VND, đọc JSON hỏng không làm vỡ trang.
+  Giá trong giỏ là giá đã lưu lúc thêm, chưa tự đồng bộ lại với server.
+
+assets/js/auth.js
+  Bản cũ lấy email rồi cho đăng nhập luôn, không kiểm tra mật khẩu.
+  Thầy sửa thành tài khoản demo: đăng ký lưu qmc_users, đăng nhập kiểm tra
+  email/mật khẩu, chặn email trùng và tên chỉ có khoảng trắng.
+  qmc_current_user chỉ lưu tên/email, không lưu mật khẩu trong phiên.
+  Danh sách tài khoản vẫn lưu mật khẩu dạng rõ để học localStorage;
+  em chỉ dùng mật khẩu demo. Đăng nhập thực tế cần backend.
+
+EM LÀM TIẾP
+
+[ ] Đọc HUONG_DAN_BAT_DAU.txt, chạy bằng Live Server và lần theo từng file.
+[ ] Tự giải thích từ card lấy ID ở đâu, vì sao refresh chi tiết vẫn hiện đúng sản phẩm.
+[ ] Thử tìm, lọc, sắp xếp rồi bấm qua chi tiết; thử link thiếu ID và mất mạng.
+[ ] Thêm sản phẩm liên quan cùng category bằng API, bỏ ID đang xem.
+[ ] Làm phân trang hoặc Xem thêm khi danh sách dài hơn.
+[ ] Chốt hướng laptop/phụ kiện hoặc linh kiện PC với thầy. Nếu giữ yêu cầu
+     linh kiện/PC build sẵn, cần tìm đúng nguồn dữ liệu cho phần đó trước,
+     không lấy laptop API rồi sửa tên thành một cấu hình PC.
+[ ] Nếu giữ giỏ, cập nhật lại giá/tồn kho từ API khi mở giỏ. Không tin giá storage
+     nếu sau này có thanh toán thật; phần này phải do backend kiểm tra.
+[ ] Thêm xác nhận mật khẩu và kiểm tra form đầy đủ hơn, tự thử tài khoản trùng,
+     sai mật khẩu, JSON hỏng và trường hợp trình duyệt không cho ghi storage.
+[ ] Làm checkout demo có form người nhận, chặn giỏ trống, không xóa giỏ khi form sai.
+[ ] Làm API hoặc cơ chế lưu yêu cầu liên hệ; hiện form mới kiểm tra dữ liệu.
+[ ] Rà trên điện thoại, máy tính và Console trước khi nộp.
+
+THẦY ĐÃ KIỂM TRA
+
+- API thật cho danh sách laptop, phụ kiện và chi tiết trả HTTP 200.
+- Cú pháp JS và các đường dẫn file cục bộ sau khi chuyển thư mục.
+- Mô phỏng DOM để kiểm tra danh sách/chi tiết, tìm/lọc/sắp xếp, giỏ,
+  số lượng, tài khoản và các trường hợp API lỗi.
+
